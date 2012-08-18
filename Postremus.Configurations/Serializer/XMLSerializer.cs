@@ -18,8 +18,16 @@ namespace Poc.Serializer
 
         public void Serialize<T>(string path, T value)
         {
+            _stream = null;
+            if (!File.Exists(path))
+            {
+                _stream = File.Create(path);
+            }
+            else
+            {
+                _stream = new FileStream(path, FileMode.Open);
+            }
             _serializer = new XmlSerializer(typeof(T));
-            _stream = new FileStream(path, FileMode.Open);
             _serializer.Serialize(_stream, value);
             _stream.Close();
         }

@@ -39,7 +39,7 @@ namespace Poc.Serializer
                 return default(T);
             }
             _serializer = new XmlSerializer(typeof(T));
-            _stream = new FileStream(path, FileMode.Open);
+            _stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             T ret = (T)_serializer.Deserialize(_stream);
             _stream.Close();
             return ret;

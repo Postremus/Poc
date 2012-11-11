@@ -8,7 +8,7 @@ namespace Poc
     [Serializable()]
     public class Config
     {
-        private ISerializer _serializer;
+        private SerializationManager _seriManager;
         private string _path;
         private Dictionary<string, object> _dic;
 
@@ -28,11 +28,11 @@ namespace Poc
             }
         }
 
-        public Config(string path, ISerializer serializer)
+        public Config(string path, ISerializerMode serializer)
         {
             _dic = new Dictionary<string, object>();
             _path = path;
-            _serializer = serializer;
+            _seriManager = new SerializationManager(serializer);
         }
 
         public T GetValue<T>(string key)
@@ -49,12 +49,12 @@ namespace Poc
 
         public void Serialize()
         {
-            _serializer.Serialize(this._path, this);
+            _seriManager.Serialize(this._path, this);
         }
 
         public Config DeSerialize()
         {
-            return _serializer.Deserialize<Config>(this._path);
+            return _seriManager.Deserialize<Config>(this._path);
         }
     }
 }

@@ -5,9 +5,9 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Soap;
 using System.IO;
 
-namespace Poc.Serializer
+namespace Poc.SerializerModes
 {
-    public class SoapSerializer : ISerializer
+    public class SoapSerializer : ISerializerMode
     {
         private SoapFormatter _serializer;
         private FileStream _stream;

@@ -6,11 +6,9 @@ using System.IO;
 
 namespace Poc
 {
-    public interface ISerializer
+    public interface ISerializerMode
     {
-        void Serialize<T>(string path, T value);
         void Serialize<T>(Stream serialisationStream, T value);
-        T Deserialize<T>(string path);
         T Deserialize<T>(Stream serialisationStream);
     }
 }

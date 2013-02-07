@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Json;
 
 namespace Poc.SerializerModes
 {
-    class JSONSerializer : ISerializerMode
+    public class JSONSerializer : ISerializerMode
     {
         DataContractJsonSerializer _seri;
 

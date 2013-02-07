@@ -32,7 +32,7 @@ namespace Poc
         {
             _dic = new Dictionary<string, object>();
             _path = path;
-            _seriManager = new SerializationManager(serializer);
+            _seriManager = new SerializationManager(serializer.GetType());
         }
 
         public T GetValue<T>(string key)

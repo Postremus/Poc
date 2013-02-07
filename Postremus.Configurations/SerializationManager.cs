@@ -10,22 +10,26 @@ namespace Poc
     {
         private ISerializerMode _serializerMode;
 
-        public SerializationManager(ISerializerMode mode)
+        public SerializationManager(Type serializationMode)
         {
-
+            if (!(serializationMode is ISerializerMode))
+            {
+                throw new ArgumentException("Param serialistionMode must implement ISerializerMode", "serializationMode");
+            }
+            _serializerMode = (ISerializerMode)Activator.CreateInstance(serializationMode);
         }
 
-        public void ChangeSerializationType<T>(Type to, Stream serialisationStream)
+        public void ChangeSerializationType<T>(Type to, Stream serializationStream)
         {
             if (!(to is ISerializerMode))
             {
-                throw new ArgumentException("Param to must be implement ISerializerMode", "to");
+                throw new ArgumentException("Param to must implement ISerializerMode", "to");
             }
 
-            T obj = Deserialize<T>(serialisationStream);
+            T obj = Deserialize<T>(serializationStream);
             
             _serializerMode = (ISerializerMode)Activator.CreateInstance(to);
-            Serialize<T>(serialisationStream, obj);
+            Serialize<T>(serializationStream, obj);
         }
 
         public void Serialize<T>(string path, T value)

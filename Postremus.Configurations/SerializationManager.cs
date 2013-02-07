@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+[assembly: System.CLSCompliant(true)]
 namespace Poc
 {
     public class SerializationManager
